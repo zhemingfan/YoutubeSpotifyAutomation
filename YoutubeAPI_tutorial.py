@@ -1,7 +1,7 @@
 from apiclient.discovery import build
 
 
-api_key = "key"
+api_key = "AIzaSyAuDoPS-HlZkDq1XNahEYYVvqaZ71snL2U"
 
 
 youtube = build('youtube', 'v3', developerKey = api_key)
