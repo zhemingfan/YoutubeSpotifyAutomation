@@ -7,7 +7,18 @@ import googleapiclient.errors
 import requests
 import youtube_dl
 
+
+
+
 from secrets import spotify_token, spotify_user_id
+
+'''
+Some notes on the Youtube API
+-create project and get API key on Youtube API 
+
+'''
+
+
 
 
 class CreatePlayList: 
