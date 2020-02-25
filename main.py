@@ -8,8 +8,6 @@ import requests
 import youtube_dl
 
 
-
-
 from secrets import spotify_token, spotify_user_id
 
 '''

@@ -2,7 +2,7 @@ from apiclient.discovery import build
 from datetime import datetime
 
 # Import API key 
-api_key = "AIzaSyAuDoPS-HlZkDq1XNahEYYVvqaZ71snL2U"
+api_key = "key"
 youtube = build('youtube', 'v3', developerKey = api_key)
 print(type(youtube))
 
