@@ -1,52 +1,53 @@
-import json
-import os
-
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
-import googleapiclient.errors
-import requests
-import youtube_dl
+from apiclient.discovery import build
 
 
-from secrets import spotify_token, spotify_user_id
+#from secrets import spotify_token, spotify_user_id
+secret = 'client_secret.json'
+
 
 '''
-Some notes on the Youtube API
--create project and get API key on Youtube API 
-
+Terminal based Youtube -> Spotify 
+On terminal, extract youtube video you like, and this will download the equivalent Spotify videos. 
+-Features: can go on account and also extract liked videos
+-Features: can go on playlist and convert playlist to a Spotify playlist
 '''
+
 
 class CreatePlayList: 
-### Constructor
 
 	def __init__(self):
+		api_key = "key"
+		#youtube = build('youtube', 'v3', developerKey = api_key)
 
-## Pull youtube client and store information in a dictionary
-		self.youtube_client = self.get_youtube_client()
-		self.all_song_info = {}
-
-
-
-	def get_youtube_client(self):
-		pass
-
-	def get_liked_videos(self):
-		pass
-
-	def get_spotify_uri(self, song_name, artist):
-		pass
-
-	def create_playlist(self):
-		pass
+		self.youtuber = build('youtube', 'v3', developerKey = api_key)
+		self.songs = [] #store info into a list 
 
 
-	def add_song_to_playlist(self):
-		pass
+	def query(self, searchTerm):#, start_time, end_time):
+		#start_time = datetime(year = 2005, month = 1, day = 1).strftime("%Y-%m-%dT%H:%M:%SZ") #whitespace sensitive
+		#end_time = datetime(year = 2006, month = 1, day = 1).strftime("%Y-%m-%dT%H:%M:%SZ")
+		res = self.youtuber.search().list(part = 'snippet', q = searchTerm, type = 'video', maxResults = 10).execute()#, publishedAfter = start_time, publishedBefore = end_time).execute() 
+		#print(res)
+		return res 
+
+	def extractTitle(self, resource):
+		for item in resource['items']:
+			for x in item['snippet']['title']:
+				self.songs.append(x)
+
+			#print(item['snippet']['title'])
 
 
 if __name__ == '__main__':
 	cp = CreatePlayList()
-	cp.add_song_to_Playlist(): 
+	#	print(cp.__dict__) # to view the attributes in dictionary format and the type of variables they're storing
+
+	resources = cp.query('Dancing Queen')
+
+	cp.extractTitle(resources)
+	print(cp.__dict__) 
 
 
 

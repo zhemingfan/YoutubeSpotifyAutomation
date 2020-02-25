@@ -23,8 +23,8 @@ print(len(res['items'])) #this shows that you max the maximum number of results 
 
 req = youtube.search().list(q = 'Billy Eilish', part = 'snippet', type = 'video', maxResults = 10).execute() #to get the top 10 results
 print(req)
-
 '''
+
 
 
 
