@@ -18,9 +18,6 @@ Some notes on the Youtube API
 
 '''
 
-
-
-
 class CreatePlayList: 
 ### Constructor
 

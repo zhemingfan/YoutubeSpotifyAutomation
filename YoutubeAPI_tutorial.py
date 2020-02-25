@@ -2,7 +2,7 @@ from apiclient.discovery import build
 from datetime import datetime
 
 # Import API key 
-api_key = "key"
+api_key = "AIzaSyAuDoPS-HlZkDq1XNahEYYVvqaZ71snL2U"
 youtube = build('youtube', 'v3', developerKey = api_key)
 print(type(youtube))
 
@@ -69,7 +69,7 @@ for item in sorted(res['items'], key = lambda x:x['snippet']['publishedAt']):
 '''
 
 # Lesson 4 - getting videos from channels
-
+'''
 channelId = 'UCkUq-s6z57uJFUFBvZIVTyg'
 
 res = youtube.channels().list(id = channelId, part = 'contentDetails').execute() #extract playlist id: UUkUq-s6z57uJFUFBvZIVTyg
@@ -92,7 +92,7 @@ def getChannelVideos(channelID):
 		#next_page_token = res['nextPageToken'] #don't do this as sometimes you return nothing
 		next_page_token = res.get('nextPageToken')
 
-		if next_page_token is None: ##don't do if next_page_token == None
+		if next_page_token is None: ##don't do if next_page_token == None since the object itself is none
 			break
 
 	return video 
@@ -100,3 +100,24 @@ def getChannelVideos(channelID):
 videos = getChannelVideos('UCkUq-s6z57uJFUFBvZIVTyg')
 for video in videos:
 	print(video['snippet']['title'])
+
+'''
+
+#Lesson 5 - OAuth2 
+from google_auth_oauthlib.flow import InstalledAppFlow
+'''
+secret =  'client_secret.json'
+scope = ['https://www.googleapis.com/auth/youtube']
+
+flow = InstalledAppFlow.from_client_secrets_file(secret, scope)
+credentials = flow.run_console()
+youtube = build('youtube', 'v3', credentials = credentials)
+
+print(type(youtube))
+
+'''
+
+
+#Lesson 6 - Liking or commenting on video (make sure you switch it to force.ssl)
+secret =  'client_secret.json'
+scope = ['https://www.googleapis.com/auth/youtube.force-ssl']
